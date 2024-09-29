@@ -21,4 +21,3 @@ class Solution(object):
 
 # print(largestNumber([10, 2]))
 # print(largestNumber([3, 30, 34, 5, 9]))
-
