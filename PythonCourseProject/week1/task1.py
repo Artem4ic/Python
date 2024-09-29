@@ -1,34 +1,23 @@
 """
 https://leetcode.com/problem-list/string/
-url: https://leetcode.com/problems/longest-substring-without-repeating-characters/description/?envType=problem-list-v2&envId=string&difficulty=MEDIUM%2CHARD
+url: https://leetcode.com/problems/largest-number/?envType=problem-list-v2&envId=string&difficulty=MEDIUM&status=TO_DO
 """
 
 
 class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        if len(s) == 0:
-            return 0
+    def largestNumber(self, nums):
+        nums_str = list(map(str, nums))
+        n = len(nums_str)
+        for i in range(n):
+            for j in range(0, n - i - 1):
+                if nums_str[j] + nums_str[j + 1] < nums_str[j + 1] + nums_str[j]:
+                    nums_str[j], nums_str[j + 1] = nums_str[j + 1], nums_str[j]
+        largest_num = "".join(nums_str)
+        if largest_num[0] == "0":
+            return "0"
 
-        if len(s) == 1:
-            return 1
-
-        maxLength = 0
-        left = 0
-        right = 0
-        arr = [0] * 256
-
-        while right < len(s):
-            while arr[ord(s[right])]:
-                arr[ord(s[left])] = 0
-                left += 1
-
-            arr[ord(s[right])] = 1
-            maxLength = max(maxLength, right - left + 1)
-            right += 1
-
-        return maxLength
+        return largest_num
 
 
-# s = input()
-# print(Solution.lengthOfLongestSubstring((s)))
-
+# print(largestNumber([10, 2]))
+# print(largestNumber([3, 30, 34, 5, 9]))
